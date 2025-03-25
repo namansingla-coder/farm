@@ -14,7 +14,7 @@ CORS(app)  # Enable CORS for frontend access
 potato_model = tf.keras.models.load_model("./models/potato_model.h5")
 POTATO_CLASSES = ['Potato___Early_blight', 'Potato___Late_blight', 'Potato___healthy']
 
-# Load PyTorch model for Poultry Disease Detection
+# Load PyTorch model for Poultry Disease Detection 
 poultry_model = torch.hub.load('pytorch/vision:v0.10.0', 'mobilenet_v2', pretrained=True)
 poultry_model.eval()  # Set model to evaluation mode
 POULTRY_CLASSES = ['Coccidiosis', 'Healthy', 'NewCastleDisease', 'Salmonella']
