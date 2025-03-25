@@ -1,119 +1,91 @@
-# 🌾 Farm Diseases Detection  
-_An AI-Powered System for Detecting Potato and Poultry Diseases using Flask & React_  
+# Farm Disease Detection
 
-![Farm Diseases Detection](https://via.placeholder.com/800x400.png?text=Farm+Diseases+Detection)
+## 📌 Overview
+Farm Disease Detection is a machine learning-based project aimed at identifying diseases in farm animals and crops. This project integrates **Potato Disease Detection** and **Poultry Disease Detection** into a single platform using **Flask** (backend) and **React** (frontend).
 
-## 📌 Overview  
-The **Farm Diseases Detection** project is an AI-based web application that helps farmers **identify diseases in potatoes and poultry** using **deep learning models**. Users can upload images, and the system will classify the disease and provide a confidence score.
+## 🚀 Features
+- **Potato Disease Detection**: Uses a trained deep learning model with TensorFlow to classify potato diseases.
+- **Poultry Disease Detection**: Implements a PyTorch-based model to detect poultry diseases.
+- **Integrated Web Application**: A unified React frontend with Flask backend to serve both detection models.
+- **User-Friendly Interface**: Simple UI for farmers to upload images and get disease predictions.
+- **API Support**: RESTful APIs for disease prediction.
 
-- 🥔 **Potato Disease Detection**: Uses **TensorFlow (Keras)** to classify potato leaf diseases.  
-- 🐔 **Poultry Disease Detection**: Uses **PyTorch** to detect poultry diseases.  
-- 🖥️ **Frontend**: Built with **React** for a user-friendly experience.  
-- ⚙ **Backend**: Implemented with **Flask API** for serving the models.  
+## 🏗️ Tech Stack
+### Frontend:
+- **React.js** (UI)
+- **Tailwind CSS** (Styling)
 
----
+### Backend:
+- **Flask** (API and integration)
+- **TensorFlow** (Potato disease model)
+- **PyTorch** (Poultry disease model)
 
-## 🚀 Features  
-✅ **AI-Based Disease Classification** – Detects diseases in potatoes and poultry.  
-✅ **Easy Image Upload** – Users can upload images for real-time predictions.  
-✅ **Confidence Score** – Displays model confidence in the prediction.  
-✅ **React Frontend** – Provides an interactive UI for users.  
-✅ **Flask API** – Serves predictions for both models.  
+### Additional Tools:
+- **Streamlit** (For initial model testing)
+- **Kaggle Dataset** (For training)
+- **Postman** (For API testing)
 
----
+## 📂 Project Structure
+farm-disease-detection/
+│── backend/
+│   ├── flask_app/
+│   │   ├── potato_model/
+│   │   ├── poultry_model/
+│   │   ├── app.py
+│   │   ├── requirements.txt
+│── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── App.js
+│   │   ├── index.js
+│   ├── package.json
+│── README.md
 
-## 🗂️ Tech Stack  
-| Component  | Technology Used |
-|------------|----------------|
-| **Frontend** | React, Tailwind CSS |
-| **Backend** | Flask (API for TensorFlow and PyTorch models) |
-| **Machine Learning** | TensorFlow, PyTorch |
-| **Data Processing** | NumPy, Pillow |
-| **Deployment** | Virtual Environment (venv) |
 
----
+## 📊 Dataset
+- **Potato Disease Dataset**: Collected from [Kaggle](https://www.kaggle.com).
+- **Poultry Disease Dataset**: Images of infected poultry categorized based on symptoms.
 
-## 📦 Installation & Setup  
-
-## 🔹 1. Clone the Repository  
-```sh
-git clone https://github.com/yourusername/farm-diseases-detection.git
-cd farm-diseases-detection
-
-## 🔹 2. Set Up Virtual Environment
-
-## 🖥 For Windows (CMD/PowerShell)
-```sh
-python -m venv venv
-venv\Scripts\activate
-
-## 🖥 For macOS/Linux
-```sh
-python3 -m venv venv
-source venv/bin/activate
-
-## 🔹 3. Install Dependencies
-```sh
+## 🛠️ Installation & Setup
+### Backend (Flask)
+```bash
+cd backend/flask_app
 pip install -r requirements.txt
-
-## 🔹 4. Running the Project
-
-
-## 🖥 Start the Flask Backend
-```sh
 python app.py
 
-## This will start the backend API at:
-## http://127.0.0.1:5000/
-
-
-## 🖥 Start the React Frontend
-```sh
 cd frontend
 npm install
 npm start
 
-## The frontend will be available at:
-## http://localhost:3000/
+🔥 Usage
+	1.	Open the web app.
+	2.	Upload an image of a potato leaf or poultry.
+	3.	The model predicts the disease and displays the results.
 
+🧪 Testing
+	•	Postman: Test API endpoints.
+	•	Unit Tests: Run pytest for Flask and Jest for React.
 
-## 🔹 5. Deactivating Virtual Environment
-```sh
-deactivate
+📌 Future Enhancements
+	•	Expand to detect diseases in other farm animals and crops.
+	•	Improve model accuracy with more training data.
+	•	Deploy as a cloud-based web service.
 
+🤝 Contributing
 
-📊 Model Details
-
-🥔 Potato Disease Model (TensorFlow)
-	•	Trained using TensorFlow Keras.
-	•	Classes: Potato___Early_blight, Potato___Late_blight, Potato___healthy.
-	•	Model Path: models/potato_model.h5.
-
-🐔 Poultry Disease Model (PyTorch)
-	•	Uses pre-trained MobileNetV2.
-	•	Classes: Coccidiosis, Healthy, NewCastleDisease, Salmonella.
-	•	Model Path: models/poultry_model.pth.
-
-⸻
-
-🛠️ Future Improvements
-	•	Integrate More Crop & Livestock Diseases
-	•	Enhance Model Accuracy Using Transfer Learning
-	•	Deploy on Cloud for Real-Time Predictions
-
-⸻
-
-👨‍💻 Author
-
-Developed by Naman Singla
-📧 namansingla@myyahoo.com
-🔗 LinkedIn - https://www.linkedin.com/in/namansingla7642/
-
-⸻
+Contributions are welcome! Feel free to open issues or submit pull requests.
 
 📜 License
 
-This project is open-source and available under the MIT License.
+MIT License
+
+⸻
+
+🚜 Developed by Naman Singla
+
+Let me know if you need modifications! 🚀
+
 
 
 
