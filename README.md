@@ -25,22 +25,6 @@ Farm Disease Detection is a machine learning-based project aimed at identifying 
 - **Kaggle Dataset** (For training)
 - **Postman** (For API testing)
 
-## 📂 Project Structure
-farm-disease-detection/
-│── backend/
-│   ├── flask_app/
-│   │   ├── potato_model/
-│   │   ├── poultry_model/
-│   │   ├── app.py
-│   │   ├── requirements.txt
-│── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── App.js
-│   │   ├── index.js
-│   ├── package.json
-│── README.md
 
 
 ## 📊 Dataset
@@ -50,7 +34,7 @@ farm-disease-detection/
 ## 🛠️ Installation & Setup
 ### Backend (Flask)
 ```bash
-cd backend/flask_app
+cd backend
 pip install -r requirements.txt
 python app.py
 
