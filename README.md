@@ -72,6 +72,7 @@ The React app should now be available at **`http://localhost:3000`**.
 |----------|--------|-------------|
 | `/predict_potato` | `POST` | Predicts disease in potato leaves |
 | `/predict_poultry` | `POST` | Predicts disease in poultry feces |
+| `/predict_crop` | `POST` | Predicts disease in crop leaves |
 
 **Example Request:**
 ```bash
