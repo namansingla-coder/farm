@@ -1,75 +1,129 @@
-# Farm Disease Detection
+# AI-Based Farm Disease Detection
 
-## 📌 Overview
-Farm Disease Detection is a machine learning-based project aimed at identifying diseases in farm animals and crops. This project integrates **Potato Disease Detection** and **Poultry Disease Detection** into a single platform using **Flask** (backend) and **React** (frontend).
+## Overview
+This project is an **AI-powered farm disease detection system** that allows users to upload images of **potato leaves** or **poultry feces** to identify potential diseases. The system utilizes deep learning models to classify and provide confidence scores for detected diseases.
 
-## 🚀 Features
-- **Potato Disease Detection**: Uses a trained deep learning model with TensorFlow to classify potato diseases.
-- **Poultry Disease Detection**: Implements a PyTorch-based model to detect poultry diseases.
-- **Integrated Web Application**: A unified React frontend with Flask backend to serve both detection models.
-- **User-Friendly Interface**: Simple UI for farmers to upload images and get disease predictions.
-- **API Support**: RESTful APIs for disease prediction.
+## Features
+- **Potato Disease Detection**: Identifies early and late blight in potato leaves.
+- **Poultry Disease Detection**: Detects poultry diseases like Coccidiosis and Newcastle Disease.
+- **Easy Image Upload**: Users can upload images, and the system processes them within seconds.
+- **Real-Time Predictions**: Displays disease classification and confidence score.
+- **User-Friendly Interface**: Built using **React** and **Tailwind CSS** for a clean UI.
+- **Fast API Backend**: Flask-based API for processing images and returning results.
 
-## 🏗️ Tech Stack
-### Frontend:
-- **React.js** (UI)
-- **Tailwind CSS** (Styling)
+---
 
-### Backend:
-- **Flask** (API and integration)
-- **TensorFlow** (Potato disease model)
-- **PyTorch** (Poultry disease model)
+## Tech Stack
+### **Frontend**
+- **React.js**
+- **Tailwind CSS**
+- **React Router**
+- **Axios** (for API requests)
 
-### Additional Tools:
-- **Streamlit** (For initial model testing)
-- **Kaggle Dataset** (For training)
-- **Postman** (For API testing)
+### **Backend**
+- **Flask** (Python)
+- **TensorFlow / PyTorch** (for AI models)
+- **OpenCV & Pillow** (image processing)
 
+---
 
+## Installation & Setup
+### **1. Clone the Repository**
+```bash
+git clone https://github.com/your-username/farm-disease-detection.git
+cd farm-disease-detection
+```
 
-## 📊 Dataset
-- **Potato Disease Dataset**: Collected from [Kaggle](https://www.kaggle.com).
-- **Poultry Disease Dataset**: Images of infected poultry categorized based on symptoms.
-
-## 🛠️ Installation & Setup
-### Backend (Flask)
+### **2. Backend Setup (Flask API)**
+#### **Create Virtual Environment (Recommended)**
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
+```
+#### **Install Dependencies**
+```bash
+pip install -r backend/requirements.txt
+```
+#### **Run Flask Server**
 ```bash
 cd backend
-pip install -r requirements.txt
 python app.py
+```
+The Flask API should now be running at **`http://127.0.0.1:5000`**.
 
+---
+
+### **3. Frontend Setup (React App)**
+#### **Install Dependencies**
+```bash
 cd frontend
 npm install
+```
+#### **Run React App**
+```bash
 npm start
+```
+The React app should now be available at **`http://localhost:3000`**.
 
-🔥 Usage
-	1.	Open the web app.
-	2.	Upload an image of a potato leaf or poultry.
-	3.	The model predicts the disease and displays the results.
+---
 
-🧪 Testing
-	•	Postman: Test API endpoints.
-	•	Unit Tests: Run pytest for Flask and Jest for React.
+## API Endpoints
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/predict_potato` | `POST` | Predicts disease in potato leaves |
+| `/predict_poultry` | `POST` | Predicts disease in poultry feces |
 
-📌 Future Enhancements
-	•	Expand to detect diseases in other farm animals and crops.
-	•	Improve model accuracy with more training data.
-	•	Deploy as a cloud-based web service.
+**Example Request:**
+```bash
+POST http://127.0.0.1:5000/predict_potato
+Content-Type: multipart/form-data
+```
+**Response Format:**
+```json
+{
+  "class": "Early Blight",
+  "confidence": 0.92
+}
+```
 
-🤝 Contributing
+---
 
-Contributions are welcome! Feel free to open issues or submit pull requests.
+## Folder Structure
+```
+root/
+│── backend/
+│   ├── app.py  # Flask backend
+│   ├── model.py  # AI model for predictions
+│   ├── static/  # Stores trained models
+│   ├── requirements.txt  # Dependencies
+│
+│── frontend/
+│   ├── src/
+│   │   ├── Components/
+│   │   ├── Pages/
+│   │   ├── api/
+│   │   ├── App.js
+│   │   ├── index.js
+│   ├── package.json
+│   ├── tailwind.config.js
+│
+│── README.md  # Documentation
+```
 
-📜 License
+---
 
-MIT License
+## Future Enhancements
+- 🌿 **Support for More Crops** (e.g., wheat, corn, etc.)
+- 📈 **Detailed Analysis Dashboard**
+- 📊 **Live Disease Trends and Reports**
+- 🌍 **Multi-language Support**
 
-⸻
+---
 
-🚜 Developed by Naman Singla
+## Contributing
+Feel free to contribute by submitting **issues** or **pull requests**.
 
-Let me know if you need modifications! 🚀
+---
 
-
-
-
+## License
+MIT License © 2025 Your Name
