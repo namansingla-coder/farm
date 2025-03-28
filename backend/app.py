@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import torch
+from tensorflow.keras.models import load_model
 import torchvision.transforms as transforms
 import tensorflow as tf
 import pickle
@@ -16,9 +17,9 @@ potato_model = tf.keras.models.load_model("./models/potato_model.h5")
 POTATO_CLASSES = ['Potato___Early_blight', 'Potato___Late_blight', 'Potato___healthy']
 
 # Load PyTorch model for Poultry Disease Detection 
-poultry_model = torch.hub.load('pytorch/vision:v0.10.0', 'mobilenet_v2', pretrained=True)
-poultry_model.eval()  # Set model to evaluation mode
-POULTRY_CLASSES = ['Coccidiosis', 'Healthy', 'NewCastleDisease', 'Salmonella']
+MODEL_PATH = "./models/poultry_disease_model.h5"
+poultry_model = load_model(MODEL_PATH)
+POULTRY_CLASSES = ['Bumblefoot', 'Fowlpox', 'Healthy', 'coryza', 'crd']
 
 # Load TensorFlow model for Crop Disease Detection
 crop_model = tf.keras.models.load_model("./models/crop_disease_model.h5")
@@ -26,15 +27,14 @@ with open("./models/class_indices.pkl", "rb") as f:
     CROP_CLASSES = pickle.load(f)
 CROP_CLASSES = {v: k for k, v in CROP_CLASSES.items()}  # Reverse mapping
 
-
 def preprocess_image(image, model_type):
     """Preprocess image differently based on model type (TensorFlow/PyTorch)."""
     img = Image.open(io.BytesIO(image))
 
     if model_type == "tensorflow":
-        img = img.resize((224, 224))
-        img_array = tf.keras.preprocessing.image.img_to_array(img) / 255.0
-        img_array = np.expand_dims(img_array, axis=0)
+        img = img.resize((224, 224))  # Resize to match model input
+        img_array = np.array(img) / 255.0  # Normalize pixel values
+        img_array = np.expand_dims(img_array, axis=0)  # Add batch dimension
         return img_array
     elif model_type == "pytorch":
         transform = transforms.Compose([
@@ -65,16 +65,21 @@ def predict_poultry():
         return jsonify({"error": "No file uploaded"}), 400
 
     file = request.files["file"]
-    img_tensor = preprocess_image(file.read(), "pytorch")
+    img_array = preprocess_image(file.read(), "tensorflow")  # Ensure proper preprocessing
 
-    with torch.no_grad():
-        outputs = poultry_model(img_tensor)
+    # Make prediction
+    prediction = poultry_model.predict(img_array)
+    predicted_class = np.argmax(prediction)
+    confidence = float(np.max(prediction) * 100)
 
-    predicted_class = np.argmax(outputs.numpy())
-    pred_class = POULTRY_CLASSES[predicted_class % len(POULTRY_CLASSES)]
-    confidence = round(np.random.uniform(85, 99), 2)
+    # Ensure class index is within range
+    if predicted_class >= len(POULTRY_CLASSES):
+        return jsonify({"error": "Invalid prediction class"}), 500
 
-    return jsonify({"class": pred_class, "confidence": confidence})
+    # Get class name
+    pred_class = POULTRY_CLASSES[predicted_class]
+
+    return jsonify({"class": pred_class, "confidence": round(confidence, 2)})
 
 @app.route("/predict_crop", methods=["POST"])
 def predict_crop():
