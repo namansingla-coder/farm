@@ -12,6 +12,7 @@ const Header = () => {
         <nav className="flex space-x-6">
           <Link to="/" className="text-white font-medium hover:underline">Home</Link>
           <Link to="/potato-detection" className="text-white font-medium hover:underline">Potato Detection</Link>
+          <Link to="/crop-detection" className="text-white font-medium hover:underline">Crop Detection</Link>
           <Link to="/poultry-detection" className="text-white font-medium hover:underline">Poultry Detection</Link>
         </nav>
       </div>
