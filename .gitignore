@@ -1,1 +1,4 @@
 venv/
+backend/dataset
+# Ignore model files
+backend/models/poultry_disease_model.h5
