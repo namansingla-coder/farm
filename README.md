@@ -44,6 +44,16 @@ source venv/bin/activate  # On Windows use: venv\Scripts\activate
 ```bash
 pip install -r backend/requirements.txt
 ```
+#### **Download Poultry Disease Model**
+Since the poultry disease detection model exceeds GitHub's file size limit, it is stored on Google Drive. Download the model from the link below and place it in the `backend/models/` folder.
+
+🔗 **https://drive.google.com/drive/folders/1UnQFXVb9eMf7QiYAW4GdU1PSBPMR8M5T?usp=sharing**
+
+Once downloaded, move the file to:
+```
+backend/models/poultry_disease_model.h5
+```
+
 #### **Run Flask Server**
 ```bash
 cd backend
@@ -95,7 +105,7 @@ root/
 │── backend/
 │   ├── app.py  # Flask backend
 │   ├── model.py  # AI model for predictions
-│   ├── static/  # Stores trained models
+│   ├── models/  # Stores trained models
 │   ├── requirements.txt  # Dependencies
 │
 │── frontend/
@@ -128,3 +138,4 @@ Feel free to contribute by submitting **issues** or **pull requests**.
 
 ## License
 MIT License © 2025 Your Name
+
