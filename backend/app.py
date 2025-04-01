@@ -1,24 +1,37 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import torch
 from tensorflow.keras.models import load_model
-import torchvision.transforms as transforms
 import tensorflow as tf
+import torchvision.transforms as transforms
 import pickle
+import gdown
 from PIL import Image
 import numpy as np
 import io
+import os
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for frontend access
+
+# Google Drive file ID for Poultry Model
+POULTRY_MODEL_DRIVE_ID = "https://drive.google.com/file/d/1isifj4_xUzXfUe9qbKLuqNQm5ldYvglo/view?usp=sharing"
+POULTRY_MODEL_PATH = "./models/poultry_disease_model.h5"
+
+# Ensure models directory exists
+os.makedirs("./models", exist_ok=True)
+
+# Download Poultry Disease Model if not present
+if not os.path.exists(POULTRY_MODEL_PATH):
+    print("Downloading Poultry Disease Model...")
+    gdown.download(f"https://drive.google.com/uc?id={POULTRY_MODEL_DRIVE_ID}", POULTRY_MODEL_PATH, quiet=False)
+    print("Download Complete!")
 
 # Load TensorFlow model for Potato Disease Detection
 potato_model = tf.keras.models.load_model("./models/potato_model.h5")
 POTATO_CLASSES = ['Potato___Early_blight', 'Potato___Late_blight', 'Potato___healthy']
 
-# Load PyTorch model for Poultry Disease Detection 
-MODEL_PATH = "./models/poultry_disease_model.h5"
-poultry_model = load_model(MODEL_PATH)
+# Load PyTorch model for Poultry Disease Detection
+poultry_model = load_model(POULTRY_MODEL_PATH)
 POULTRY_CLASSES = ['Bumblefoot', 'Fowlpox', 'Healthy', 'coryza', 'crd']
 
 # Load TensorFlow model for Crop Disease Detection
