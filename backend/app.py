@@ -110,4 +110,5 @@ def predict_crop():
     return jsonify({"class": predicted_class, "confidence": confidence})
 
 if __name__ == "__main__":
-    app.run()
+    port = int(os.environ.get("PORT", 5000))  # Use Render's PORT
+    app.run(host="0.0.0.0", port=port)
