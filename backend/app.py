@@ -14,7 +14,7 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for frontend access
 
 # Google Drive file ID for Poultry Model
-POULTRY_MODEL_DRIVE_ID = "https://drive.google.com/file/d/1isifj4_xUzXfUe9qbKLuqNQm5ldYvglo/view?usp=sharing"
+POULTRY_MODEL_DRIVE_ID = "1isifj4_xUzXfUe9qbKLuqNQm5ldYvglo"
 POULTRY_MODEL_PATH = "./models/poultry_disease_model.h5"
 
 # Ensure models directory exists
