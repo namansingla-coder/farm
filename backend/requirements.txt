@@ -6,5 +6,4 @@ torchvision
 numpy
 pillow
 gdown
-pickle5
 gunicorn
