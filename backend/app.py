@@ -13,32 +13,50 @@ import os
 app = Flask(__name__)
 CORS(app)  # Enable CORS for frontend access
 
-# Google Drive file ID for Poultry Model
-POULTRY_MODEL_DRIVE_ID = "1isifj4_xUzXfUe9qbKLuqNQm5ldYvglo"
-POULTRY_MODEL_PATH = "./models/poultry_disease_model.h5"
+# Define Google Drive file IDs
+DRIVE_IDS = {
+    "potato_model": "1isifj4_xUzXfUe9qbKLuqNQm5ldYvglo",  # Replace with actual ID
+    "poultry_model": "1isifj4_xUzXfUe9qbKLuqNQm5ldYvglo",  # Existing Poultry Model ID 
+    "crop_model": "1xEdMivwR8Kdm85OiSVkb4zmPPufvgw-v",  # Replace with actual ID
+    "crop_classes": "1kHnvKbJS2eIFlf1UmS7vZkm8nyLxzEfT"  # Replace with actual ID
+}
+
+# Define model paths
+MODEL_PATHS = {
+    "potato_model": "./models/potato_model.h5",
+    "poultry_model": "./models/poultry_disease_model.h5",
+    "crop_model": "./models/crop_disease_model.h5",
+    "crop_classes": "./models/class_indices.pkl"
+}
 
 # Ensure models directory exists
 os.makedirs("./models", exist_ok=True)
 
-# Download Poultry Disease Model if not present
-if not os.path.exists(POULTRY_MODEL_PATH):
-    print("Downloading Poultry Disease Model...")
-    gdown.download(f"https://drive.google.com/uc?id={POULTRY_MODEL_DRIVE_ID}", POULTRY_MODEL_PATH, quiet=False)
-    print("Download Complete!")
+# Function to download models if not available
+def download_model(file_id, file_path):
+    """Download file from Google Drive if not present locally."""
+    if not os.path.exists(file_path):
+        print(f"Downloading {file_path}...")
+        gdown.download(f"https://drive.google.com/uc?id={file_id}", file_path, quiet=False)
+        print("Download Complete!")
 
-# Load TensorFlow model for Potato Disease Detection
-potato_model = tf.keras.models.load_model("./models/potato_model.h5")
-POTATO_CLASSES = ['Potato___Early_blight', 'Potato___Late_blight', 'Potato___healthy']
+# Download required models and files
+for key, path in MODEL_PATHS.items():
+    download_model(DRIVE_IDS[key], path)
 
-# Load PyTorch model for Poultry Disease Detection
-poultry_model = load_model(POULTRY_MODEL_PATH)
-POULTRY_CLASSES = ['Bumblefoot', 'Fowlpox', 'Healthy', 'coryza', 'crd']
+# Load models
+potato_model = tf.keras.models.load_model(MODEL_PATHS["potato_model"])
+poultry_model = load_model(MODEL_PATHS["poultry_model"])
+crop_model = tf.keras.models.load_model(MODEL_PATHS["crop_model"])
 
-# Load TensorFlow model for Crop Disease Detection
-crop_model = tf.keras.models.load_model("./models/crop_disease_model.h5")
-with open("./models/class_indices.pkl", "rb") as f:
+# Load Crop Classes Mapping
+with open(MODEL_PATHS["crop_classes"], "rb") as f:
     CROP_CLASSES = pickle.load(f)
 CROP_CLASSES = {v: k for k, v in CROP_CLASSES.items()}  # Reverse mapping
+
+# Class Labels
+POTATO_CLASSES = ['Potato___Early_blight', 'Potato___Late_blight', 'Potato___healthy']
+POULTRY_CLASSES = ['Bumblefoot', 'Fowlpox', 'Healthy', 'coryza', 'crd']
 
 def preprocess_image(image, model_type):
     """Preprocess image differently based on model type (TensorFlow/PyTorch)."""
@@ -110,5 +128,4 @@ def predict_crop():
     return jsonify({"class": predicted_class, "confidence": confidence})
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))  # Use Render's PORT
-    app.run(host="0.0.0.0", port=port)
+    app.run()
