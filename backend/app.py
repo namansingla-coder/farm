@@ -127,3 +127,6 @@ def predict_crop():
 
     return jsonify({"class": predicted_class, "confidence": confidence})
 
+if __name__ == "__main__":
+    app.run()
+
