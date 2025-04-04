@@ -128,5 +128,7 @@ def predict_crop():
     return jsonify({"class": predicted_class, "confidence": confidence})
 
 if __name__ == "__main__":
-    app.run()
+    import os
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
 
