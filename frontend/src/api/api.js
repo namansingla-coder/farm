@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://127.0.0.1:5000"; // Update this if deployed
+const BASE_URL = "https://farm-disease-detection-api.onrender.com"; // Updated to deployed backend URL
 
 export const predictDisease = async (file, type) => {
   let endpoint = "";
